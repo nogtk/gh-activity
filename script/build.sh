@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-echo "TODO implement this script."
-echo "It should build binaries in dist/<platform>-<arch>[.exe] as needed."
-exit 1
+cargo build --release --target aarch64-apple-darwin
+mv "target/aarch64-apple-darwin/release/gh-diary" "./dist/darwin-amd64"
