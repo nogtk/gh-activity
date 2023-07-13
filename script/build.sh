@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-mv "target/aarch64-apple-darwin/release/gh-activity" "./dist/darwin-amd64"
+mv "target/${TARGET}/release/gh-activity" "./dist/${ARTIFACT}"
