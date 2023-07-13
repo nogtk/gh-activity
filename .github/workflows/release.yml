@@ -25,13 +25,13 @@ jobs:
             target: x86_64-pc-windows-msvc
             artifact: x86_64-pc-windows-msvc.exe
           # 64-bit Linux
-          - os: ubuntu-latest
-            target: x86_64-unknown-linux-gnu
-            artifact: x86_64-unknown-linux-gnu
+          # - os: ubuntu-latest
+          #   target: x86_64-unknown-linux-gnu
+          #   artifact: x86_64-unknown-linux-gnu
           # ARM64 Linux
-          - os: ubuntu-latest
-            target: aarch64-unknown-linux-gnu
-            artifact: aarch64-unknown-linux-gnu
+          # - os: ubuntu-latest
+          #   target: aarch64-unknown-linux-gnu
+          #   artifact: aarch64-unknown-linux-gnu
 
     runs-on: ${{ matrix.os }}
 
