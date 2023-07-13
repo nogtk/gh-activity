@@ -45,7 +45,7 @@ jobs:
         with:
           use-cross: true
           command: build
-          args: --release --target $${{ matrix.target }}
+          args: --release --target ${{ matrix.target }}
 
       - uses: cli/gh-extension-precompile@v1
         with:
