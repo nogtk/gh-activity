@@ -17,13 +17,13 @@ jobs:
             target: x86_64-apple-darwin
             artifact: x86_64-apple-darwin
           # 64-bit MinGW
-          # - os: ubuntu-latest
-          #   target: x86_64-pc-windows-gnu
-          #   artifact: x86_64-pc-windows-gnu.exe
+          - os: ubuntu-latest
+            target: x86_64-pc-windows-gnu
+            artifact: x86_64-pc-windows-gnu.exe
           # 64-bit MSVC
-          # - os: ubuntu-latest
-          #   target: x86_64-pc-windows-msvc
-          #   artifact: x86_64-pc-windows-msvc.exe
+          - os: ubuntu-latest
+            target: x86_64-pc-windows-msvc
+            artifact: x86_64-pc-windows-msvc.exe
           # 64-bit Linux
           # - os: ubuntu-latest
           #   target: x86_64-unknown-linux-gnu
