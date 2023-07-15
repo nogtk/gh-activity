@@ -20,7 +20,7 @@ pub fn gh_build() -> String {
     .unwrap()
         - Duration::days(1);
 
-    let start_date = DateSelect::new("When do you search from date?")
+    let start_date = DateSelect::new("When do you wanna search from?")
         .with_starting_date(now)
         .with_min_date(two_years_ago)
         .with_max_date(end_of_month)
@@ -30,7 +30,7 @@ pub fn gh_build() -> String {
         .format("%Y-%m-%d")
         .to_string();
 
-    let end_date = DateSelect::new("When do you search until date?")
+    let end_date = DateSelect::new("When do you wanna search until?")
         .with_starting_date(now)
         .with_min_date(two_years_ago)
         .with_max_date(end_of_month)
@@ -43,7 +43,7 @@ pub fn gh_build() -> String {
     let command = "gh pr list --search merged:".to_string();
     let command = format!("{}{}..{}", command, start_date, end_date);
 
-    let repo = Text::new("What is repo for searching?").prompt().unwrap();
+    let repo = Text::new("Which repo do you wanna search?").prompt().unwrap();
     let command = format!("{} -R {}", command, repo);
 
     let author = Text::new("Who is the author?")
