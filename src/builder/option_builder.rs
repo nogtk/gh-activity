@@ -1,5 +1,6 @@
 mod author;
 mod date;
+mod limit;
 mod repo;
 
 pub struct GhOption {
@@ -26,4 +27,8 @@ pub fn repo() -> GhOption {
 
 pub fn author() -> GhOption {
     author::build()
+}
+
+pub fn limit() -> GhOption {
+    limit::build()
 }

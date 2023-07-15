@@ -6,6 +6,7 @@ pub fn gh_build() -> String {
     command = format!("{} {}", command, option_builder::date().format());
     command = format!("{} {}", command, option_builder::repo().format());
     command = format!("{} {}", command, option_builder::author().format());
+    command = format!("{} {}", command, option_builder::limit().format());
 
     command
 }
