@@ -48,5 +48,12 @@ pub fn gh_build() -> String {
     let repo = Text::new("What is repo for searching?").prompt().unwrap();
     let command = format!("{} -R {}", command, repo);
 
+    let author = Text::new("Who is the author?")
+        .with_default("@me")
+        .prompt()
+        .unwrap();
+    let command = format!("{} --author {}", command, author);
+
+    println!("{}", command);
     command
 }
