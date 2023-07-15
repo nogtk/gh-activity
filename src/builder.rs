@@ -2,9 +2,6 @@ use chrono::{Datelike, Duration, Local, NaiveDate, Weekday};
 use inquire::{DateSelect, Text};
 
 pub fn gh_build() -> String {
-    let mut command = "gh".to_owned();
-    command.push_str(&" pr list");
-
     let now = Local::now().date_naive();
     let two_years_ago = NaiveDate::from_ymd_opt(now.year() - 2, now.month(), now.day()).unwrap();
     let end_of_month = NaiveDate::from_ymd_opt(
@@ -45,11 +42,11 @@ pub fn gh_build() -> String {
         .format("%Y-%m-%d")
         .to_string();
 
+    let command = "gh pr list --search merged:".to_string();
+    let command = format!("{}{}..{}", command, start_date, end_date);
+
     let repo = Text::new("What is repo for searching?").prompt().unwrap();
+    let command = format!("{} -R {}", command, repo);
 
-    let default = "gh pr list --search merged:".to_string();
-    let mut args = format!("{}{}", default, start_date);
-    args = format!("{}..{}", args, end_date);
-
-    format!("{} -R {}", args, repo)
+    command
 }
