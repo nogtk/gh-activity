@@ -43,6 +43,6 @@ pub fn build() -> GhOption {
 
     GhOption {
         arg: Some(String::from("--search")),
-        content: format!("merged:{}..{}", start_date, end_date),
+        content: Some(format!("merged:{}..{}", start_date, end_date)),
     }
 }

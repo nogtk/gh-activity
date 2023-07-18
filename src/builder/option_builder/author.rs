@@ -8,6 +8,6 @@ pub fn build() -> GhOption {
         .unwrap();
     GhOption {
         arg: Some(String::from("--author")),
-        content: t,
+        content: Some(t),
     }
 }
