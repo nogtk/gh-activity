@@ -9,6 +9,6 @@ pub fn build() -> GhOption {
 
     GhOption {
         arg: Some(String::from("--limit")),
-        content: (t),
+        content: Some(t),
     }
 }

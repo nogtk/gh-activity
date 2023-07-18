@@ -7,6 +7,6 @@ pub fn build() -> GhOption {
         .unwrap();
     GhOption {
         arg: Some(String::from("-R")),
-        content: t,
+        content: Some(t),
     }
 }

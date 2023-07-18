@@ -1,18 +1,21 @@
 mod author;
 mod date;
 mod limit;
+mod output;
 mod repo;
 
 pub struct GhOption {
     pub arg: Option<String>,
-    pub content: String,
+    pub content: Option<String>,
 }
 
 impl GhOption {
     pub fn format(&self) -> String {
-        match &self.arg {
-            None => self.content.to_string(),
-            Some(c) => format!("{} {}", c, self.content),
+        match (&self.arg, &self.content) {
+            (None, None) => String::from(""),
+            (None, Some(c)) => c.to_string(),
+            (Some(a), None) => a.to_string(),
+            (Some(a), Some(c)) => format!("{} {}", a, c),
         }
     }
 }
@@ -31,4 +34,8 @@ pub fn author() -> GhOption {
 
 pub fn limit() -> GhOption {
     limit::build()
+}
+
+pub fn output() -> GhOption {
+    output::build()
 }
