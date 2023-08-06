@@ -3,7 +3,7 @@ use inquire::Text;
 
 pub fn build() -> GhOption {
     let t = Text::new("Which repo do you wanna search?")
-        .with_help_message("To search all repo, just enter with nothing")
+        .with_help_message("if blank, will search for current directory")
         .prompt()
         .unwrap();
 
