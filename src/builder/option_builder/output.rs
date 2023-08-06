@@ -1,5 +1,5 @@
 use super::GhOption;
-use inquire::{Confirm, MultiSelect};
+use inquire::{list_option::ListOption, validator::Validation, Confirm, MultiSelect};
 
 pub fn build() -> GhOption {
     let c = Confirm::new("Do you use json format?")
@@ -8,7 +8,19 @@ pub fn build() -> GhOption {
 
     match c {
         Ok(true) => {
+            let validator = |input: &[ListOption<&&str>]| {
+                let selected = input.len() == 0;
+                match selected {
+                    true => Ok(Validation::Invalid(
+                        "You must choose at least one field".into(),
+                    )),
+                    false => Ok(Validation::Valid),
+                }
+            };
+
             let chose_fields = MultiSelect::new("Choose fields", fields())
+                .with_validator(validator)
+                .with_help_message("check/uncheck by space key")
                 .prompt()
                 .unwrap()
                 .iter()
