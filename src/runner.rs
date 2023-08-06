@@ -3,11 +3,11 @@ use inquire::Confirm;
 use tokio::process::Command;
 
 pub async fn gh_run(args: String) {
-    let exec_type = Confirm::new("Copy command to clipboard?")
+    let on_clipboard = Confirm::new("Copy command to clipboard?")
         .with_default(false)
         .prompt();
 
-    match exec_type {
+    match on_clipboard {
         Ok(true) => {
             Clipboard::new().unwrap().set_text(args.clone()).unwrap();
         }
