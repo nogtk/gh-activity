@@ -1,8 +1,14 @@
 use super::GhOption;
 use chrono::{Datelike, Duration, Local, NaiveDate, Weekday};
-use inquire::DateSelect;
+use inquire::{DateSelect, Select};
 
 pub fn build() -> GhOption {
+    let options: Vec<&str> = vec!["created", "closed", "merged"];
+    let selected = Select::new("What type of event do you wanna search?", options)
+        .prompt()
+        .unwrap()
+        .to_string();
+
     let now = Local::now().date_naive();
     let two_years_ago = NaiveDate::from_ymd_opt(now.year() - 2, now.month(), now.day()).unwrap();
     let end_of_month = NaiveDate::from_ymd_opt(
@@ -43,6 +49,6 @@ pub fn build() -> GhOption {
 
     GhOption {
         arg: Some(String::from("--search")),
-        content: Some(format!("merged:{}..{}", start_date, end_date)),
+        content: Some(format!("{}:{}..{}", selected, start_date, end_date)),
     }
 }
