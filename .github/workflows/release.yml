@@ -34,11 +34,17 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@v4
+      # rust-toolchain.toml の pinned 版(1.89.0)に対してターゲットを導入
+      - uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: stable
-          target: ${{ matrix.target }}
+          # toolchain は rust-toolchain.toml に委譲（未指定で自動検出）
+          targets: ${{ matrix.target }}
+          components: rustfmt, clippy
+      # cross を明示的に導入（Linuxでのクロスコンパイル、他OSではcargoにフォールバック）
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cross
       - uses: actions-rs/cargo@v1
         with:
           use-cross: true
