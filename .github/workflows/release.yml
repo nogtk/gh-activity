@@ -34,16 +34,21 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@v4
+      # rust-toolchain.toml の pinned 版(1.89.0)に対してターゲットを導入
+      - uses: dtolnay/rust-toolchain@1.89.0
         with:
-          toolchain: stable
-          target: ${{ matrix.target }}
-      - uses: actions-rs/cargo@v1
+          # toolchain は rust-toolchain.toml に委譲（未指定で自動検出）
+          targets: ${{ matrix.target }}
+          components: rustfmt, clippy
+      # cross を明示的に導入（Linuxでのクロスコンパイル、他OSではcargoにフォールバック）
+      - uses: taiki-e/install-action@v2
         with:
-          use-cross: true
-          command: build
-          args: --release --target ${{ matrix.target }}
+          tool: cross
+      - name: Build (cross)
+        shell: bash
+        run: |
+          cross build --release --target ${{ matrix.target }}
 
       - uses: cli/gh-extension-precompile@v1
         with:
