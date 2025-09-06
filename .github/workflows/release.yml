@@ -36,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # rust-toolchain.toml の pinned 版(1.89.0)に対してターゲットを導入
-      - uses: dtolnay/rust-toolchain@master
+      - uses: dtolnay/rust-toolchain@1.89.0
         with:
           # toolchain は rust-toolchain.toml に委譲（未指定で自動検出）
           targets: ${{ matrix.target }}
@@ -45,11 +45,10 @@ jobs:
       - uses: taiki-e/install-action@v2
         with:
           tool: cross
-      - uses: actions-rs/cargo@v1
-        with:
-          use-cross: true
-          command: build
-          args: --release --target ${{ matrix.target }}
+      - name: Build (cross)
+        shell: bash
+        run: |
+          cross build --release --target ${{ matrix.target }}
 
       - uses: cli/gh-extension-precompile@v1
         with:
