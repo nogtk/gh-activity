@@ -63,6 +63,7 @@ excluded_tools: []
 
 # initial prompt for the project. It will always be given to the LLM upon activating the project
 # (contrary to the memories, which are loaded on demand).
-initial_prompt: ""
+initial_prompt: |
+  このプロジェクトは gh-activity（GitHub CLI 拡張）です。既存の対話挙動と CLI インターフェイスの互換性を最優先し、小さな変更でテスト容易性を高めてください。Rust は 1.89.0。テストは `cargo test` を使用し、外部 `gh` 依存は E2E で PATH 先頭にダミー `gh` を置いて検証します。.github/workflows/test.yml で PR/Push 時に CI が走ります。大規模リファクタや破壊的変更は別 Issue/PR で検討してください。
 
 project_name: "vk-3a7a-rust"
